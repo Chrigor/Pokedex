@@ -64,8 +64,12 @@ function setarInformacoes(pokemonObj) {
     let $speed = document.getElementById('velocidade')
     let $defesaEspecial = document.getElementById('especial-defesa')
     let $ataqueEspecial = document.getElementById('especial-ataque')
+    let $img = document.getElementById('pokemonImagem')
+    let $nomePokemonTexto = document.getElementById('nomePokemonTexto')
 
-    console.log(pokemonObj.estatisticas)
+    $nomePokemonTexto.innerHTML = pokemonObj.nome
+
+    $img.src = pokemonObj.imagens.front_default
 
     $speed.innerHTML = pokemonObj.estatisticas[0].base_stat
     $defesaEspecial.innerHTML = pokemonObj.estatisticas[1].base_stat
