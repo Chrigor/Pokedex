@@ -13,7 +13,7 @@ body {
 
 .page-footer {
     color: white;
-    background-image: linear-gradient( to right,red, white );
+    background-image: linear-gradient( to right, red, white);
 }
 
 .fab {
@@ -22,9 +22,41 @@ body {
 }
 
 .fab:hover {
-    color:#00ffff;
+    color: #00ffff;
 }
 
 .container-fluid {
     padding: 0;
+}
+
+/* LOADING */
+
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #22a6b3;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.a {
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.tiraDisplay {
+    display: none;
 }
