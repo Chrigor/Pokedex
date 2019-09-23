@@ -60,3 +60,22 @@ body {
 .tiraDisplay {
     display: none;
 }
+
+.card-pokemon {
+    animation: fade 2s backwards;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateX(-35%)
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%)
+    }
+}
+
+.trocarImg {
+    animation: fade 1s backwards;
+}

@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
-    setTimeout(tirarLoading, 1000)
+    setTimeout(tirarLoading, 500)
 })
 
 function tirarLoading() {
@@ -16,7 +16,7 @@ $pesquisarID.addEventListener('click', main)
 function main() {
     let nomePokemon = getPokemonName()
 
-    if (validarInput(nomePokemon)) {
+    if (validarInput(nomePokemon) && validarGeracao(nomePokemon)) {
         nomePokemon = tratarNomePokemon(nomePokemon)
         getPokemon(nomePokemon)
     } else {
@@ -25,6 +25,11 @@ function main() {
 
 }
 
+function validarGeracao(string) {
+    let n = Number(string)
+
+    return n <= 151 ? true : false
+}
 
 function getPokemonName() {
     let $campoNomePokemon = document.getElementById('nomePokemon')
@@ -32,6 +37,7 @@ function getPokemonName() {
 }
 
 function getPokemon(pokemonName) {
+    //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}/`)
         .then(function (response) {
             if (response.status == 200) {
@@ -41,22 +47,46 @@ function getPokemon(pokemonName) {
             }
         })
         .then(function (pokemon) {
+            // pra pegar o text
+            fetch(pokemon.species.url)
+                .then(function (response) {
+                    if (response.status == 200) {
+                        return response.json()
+                    } else {
+                        throw new Error('error na busca do text')
+                    }
 
-            let nomePokemon = pokemon.forms[0].name
-            let indicePokemon = pokemon.id
-            let stats = pokemon.stats // array dos atributos
-            let sprites = pokemon.sprites // Objeto com atbr de imagens
-            let type = pokemon.types // array (há alguns de uma posição só)
-            let p = new Pokemon(nomePokemon, indicePokemon, stats, type, sprites)
+                })
+                .then(function (r) {
+                    let text = ''
 
-            setarInformacoes(p)
+                    for (let i = 0; i < r.flavor_text_entries.length; i++) {
+                        if (r.flavor_text_entries[i].language.name == "en" && text.length < 300) {
+                            text += r.flavor_text_entries[i].flavor_text
+                        }
+                    }
 
+                    let nomePokemon = pokemon.forms[0].name
+                    let indicePokemon = pokemon.id
+                    let stats = pokemon.stats // array dos atributos
+                    let sprites = pokemon.sprites // Objeto com atbr de imagens
+                    let type = pokemon.types // array (há alguns de uma posição só)
+                    let habilidades = pokemon.moves
+
+
+                    let p = new Pokemon(nomePokemon, indicePokemon, stats, type, sprites, habilidades, text)
+                    setarInformacoes(p)
+                })
+                .catch(function (exception) {
+                    console.log(exception)
+                })
         })
         .catch(function (error) {
             console.log('error')
             alert('Pokemon não detectado em nossa pokedex:' + error)
         })
 }
+
 
 function tratarNomePokemon(string) {
     return string.trim().toLowerCase()
@@ -75,9 +105,8 @@ function setarInformacoes(pokemonObj) {
     let $ataqueEspecial = document.getElementById('especial-ataque')
     let $img = document.getElementById('pokemonImagem')
     let $nomePokemonTexto = document.getElementById('nomePokemonTexto')
-
     let tipos = createTypes(pokemonObj.tipo)
-
+    let $texto = document.getElementById('textoPokemon')
 
     $nomePokemonTexto.innerHTML = `${pokemonObj.nome} # ${pokemonObj.indice}`
     $img.src = pokemonObj.imagens.front_default
@@ -87,10 +116,17 @@ function setarInformacoes(pokemonObj) {
     $defesa.innerHTML = pokemonObj.estatisticas[3].base_stat
     $ataque.innerHTML = pokemonObj.estatisticas[4].base_stat
     $hp.innerHTML = pokemonObj.estatisticas[5].base_stat
+    $texto.innerHTML = pokemonObj.texto
+
+    document.getElementById('front_default').src = dados.sprites.front_default
+    document.getElementById('back_default').src = dados.sprites.back_default
+    document.getElementById('front_shiny').src = dados.sprites.front_shiny
+    document.getElementById('back_shiny').src = dados.sprites.back_shiny
 
     removeTipos()
     addTypes(tipos)
 }
+
 
 function createTypes(types) {
     let arrayTipos = []
@@ -120,7 +156,6 @@ function removeTipos() {
     let $tipos = document.querySelectorAll('.tipoPokemon')
     let tipo = document.getElementById('tipos')
 
-    console.log(tipo)
     if ($tipos.length > 0) {
         for (let i = 0; i < $tipos.length; i++) {
             tipo.removeChild($tipos[i])
@@ -158,12 +193,18 @@ function getColorType(tipo) {
     }
 
 }
+
+
+
 class Pokemon {
-    constructor(nome, indice, estatisticas, tipo, imagens) {
+    constructor(nome, indice, estatisticas, tipo, imagens, [h1, h2, h3, h4], texto) {
         this.nome = nome
         this.indice = indice
         this.estatisticas = estatisticas
         this.tipo = tipo
         this.imagens = imagens
+        this.habilidades = [h1, h2, h3, h4]
+        this.texto = texto
     }
 }
+
