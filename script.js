@@ -76,6 +76,7 @@ function getPokemon(pokemonName) {
 
                     let p = new Pokemon(nomePokemon, indicePokemon, stats, type, sprites, habilidades, text)
                     setarInformacoes(p)
+
                 })
                 .catch(function (exception) {
                     console.log(exception)
@@ -103,13 +104,13 @@ function setarInformacoes(pokemonObj) {
     let $speed = document.getElementById('velocidade')
     let $defesaEspecial = document.getElementById('especial-defesa')
     let $ataqueEspecial = document.getElementById('especial-ataque')
-    let $img = document.getElementById('pokemonImagem')
+    //let $img = document.getElementById('pokemonImagem')
     let $nomePokemonTexto = document.getElementById('nomePokemonTexto')
     let tipos = createTypes(pokemonObj.tipo)
     let $texto = document.getElementById('textoPokemon')
 
     $nomePokemonTexto.innerHTML = `${pokemonObj.nome} # ${pokemonObj.indice}`
-    $img.src = pokemonObj.imagens.front_default
+    //$img.src = pokemonObj.imagens.front_default
     $speed.innerHTML = pokemonObj.estatisticas[0].base_stat
     $defesaEspecial.innerHTML = pokemonObj.estatisticas[1].base_stat
     $ataqueEspecial.innerHTML = pokemonObj.estatisticas[2].base_stat
@@ -118,10 +119,11 @@ function setarInformacoes(pokemonObj) {
     $hp.innerHTML = pokemonObj.estatisticas[5].base_stat
     $texto.innerHTML = pokemonObj.texto
 
-    document.getElementById('front_default').src = dados.sprites.front_default
-    document.getElementById('back_default').src = dados.sprites.back_default
-    document.getElementById('front_shiny').src = dados.sprites.front_shiny
-    document.getElementById('back_shiny').src = dados.sprites.back_shiny
+
+    document.getElementById('front_default').src = pokemonObj.imagens.front_default
+    document.getElementById('back_default').src = pokemonObj.imagens.back_default
+    document.getElementById('front_shiny').src = pokemonObj.imagens.front_shiny
+    document.getElementById('back_shiny').src = pokemonObj.imagens.back_shiny 
 
     removeTipos()
     addTypes(tipos)
