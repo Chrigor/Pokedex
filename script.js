@@ -2,6 +2,22 @@ window.addEventListener('load', () => {
     setTimeout(tirarLoading, 500)
 })
 
+let $nomePokemon = document.getElementById('nomePokemon')
+$nomePokemon.addEventListener('keypress', verificarEnter)
+
+function verificarEnter(event) {
+    if (event.key == 'Enter') {
+        let nomePokemon = getPokemonName()
+        if (validarInput(nomePokemon) && validarGeracao(nomePokemon)) {
+            nomePokemon = tratarNomePokemon(nomePokemon)
+            getPokemon(nomePokemon)
+            scrollToIdOnClick(event)
+        } else {
+            alert('error')
+        }
+    }
+}
+
 function tirarLoading() {
     let $a = document.getElementsByClassName('a')[0]
     $a.style.display = "none"
@@ -123,7 +139,7 @@ function setarInformacoes(pokemonObj) {
     document.getElementById('front_default').src = pokemonObj.imagens.front_default
     document.getElementById('back_default').src = pokemonObj.imagens.back_default
     document.getElementById('front_shiny').src = pokemonObj.imagens.front_shiny
-    document.getElementById('back_shiny').src = pokemonObj.imagens.back_shiny 
+    document.getElementById('back_shiny').src = pokemonObj.imagens.back_shiny
 
     removeTipos()
     addTypes(tipos)
@@ -140,7 +156,6 @@ function createTypes(types) {
         tipo.innerHTML = types[i].type.name
         tipo.style.textDecoration = "none"
         tipo.style.background = getColorType(types[i].type.name)
-        console.log(getColorType(types[i].type.name))
         arrayTipos.push(tipo)
     }
 
@@ -196,8 +211,6 @@ function getColorType(tipo) {
 
 }
 
-
-
 class Pokemon {
     constructor(nome, indice, estatisticas, tipo, imagens, [h1, h2, h3, h4], texto) {
         this.nome = nome
@@ -209,4 +222,10 @@ class Pokemon {
         this.texto = texto
     }
 }
+
+// IIFE p/ primeiro Pokémon
+(function () {
+    getPokemon('pikachu')
+    console.log('chamou')
+})()
 

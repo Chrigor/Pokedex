@@ -3,7 +3,6 @@ const menuItems = document.querySelectorAll('.nav-link') // filtro [Links intern
 const buttonNome = document.getElementById('buscarNome')
 const buttonId = document.getElementById('buscarID')
 
-console.log(buttonNome, buttonId)
 buttonNome.addEventListener('click', scrollButton)
 buttonId.addEventListener('click', scrollButton)
 
