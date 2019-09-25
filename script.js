@@ -8,12 +8,12 @@ $nomePokemon.addEventListener('keypress', verificarEnter)
 function verificarEnter(event) {
     if (event.key == 'Enter') {
         let nomePokemon = getPokemonName()
-        if (validarInput(nomePokemon) && validarGeracao(nomePokemon)) {
+        if (validarInput(nomePokemon)) {
             nomePokemon = tratarNomePokemon(nomePokemon)
             getPokemon(nomePokemon)
             scrollToIdOnClick(event)
         } else {
-            alert('error')
+            alert('error verificacao')
         }
     }
 }
@@ -36,7 +36,7 @@ function main() {
         nomePokemon = tratarNomePokemon(nomePokemon)
         getPokemon(nomePokemon)
     } else {
-        alert('error')
+        alert('error main')
     }
 
 }

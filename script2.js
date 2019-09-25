@@ -47,6 +47,18 @@ function mostrar(elemento) {
 
 /* == POKEQUIZ == */
 
+let pokemonsIDs
+let contador
+let valueCerto
+let acertos
+
+
+function iniciarGame() {
+    pokemonsIDs = gerarNumeros()
+    contador = 0
+    valueCerto = 0
+    acertos = 0
+}
 
 function gerarNumeros() {
     let pokemonID = []
@@ -76,48 +88,118 @@ function sortfunction(a, b) {
 
 } */
 
-let pokemonsNaoAparecidos = gerarNumeros()
-let pokemonsAparecidos = []
+function getPokemonsOptions() {
+    let option = []
+    let index = 0
+    contador++
 
+    if (contador > 9) {
+        for (let i in pokemonsIDs) {
+            if (pokemonsIDs[i] != -1) {
+                option.push(pokemonsIDs[i])
+            }
+        }
+    } else {
+        for (let i = 0; i < 4; i++) {
+            do {
+                index = Math.ceil(Math.random() * 39)
+            } while (pokemonsIDs[index] < 0)
 
-function apareceuPokemon(id) {
-    return (pokemonsNaoAparecidos.indexOf(id) == -1) ? true : false
+            option.push(index)
+            pokemonsIDs[index] = -1
+        }
+
+    }
+
+    return option
 }
 
-async function getPokemonSorteado() {
-    let id = Math.ceil(Math.random() * 40)
-    let elemento = await reqPokemon(pokemonsNaoAparecidos[id])
-    return elemento
+
+async function opcoes(array) {
+    let index = Math.ceil(Math.random() * 4) - 1
+    for (let i = 0; i < 4; i++) {
+        let $op = document.getElementById(`op${i + 1}`)
+        if (i == index) {
+            //console.log('Op certa: ' + array[index])
+            let pokemon = await getPokemonQuiz(array[index])
+            let $img = document.getElementById('pokemonSorteado')
+
+            console.log(pokemon.sprites)
+            $op.setAttribute('value', array[index])
+            $op.innerHTML = pokemon.name
+            $img.src = pokemon.sprites.front_default
+            valueCerto = array[index]
+        } else {
+            let pokemonWrong = await getPokemonQuiz(array[i])
+            $op.setAttribute('value', array[i])
+            $op.innerHTML = pokemonWrong.name
+        }
+    }
+
+}
+
+function gerarRodada() {
+    let op = getPokemonsOptions()
+    opcoes(op)
 }
 
 
-function setarPokemonCorreto(pokemon) {
-    let $img = document.getElementById('pokemonSorteado')
-    let indice = Math.ceil((Math.random() * 4))
-    let $opCorreta = document.getElementById(`op${indice}`)
-
-    $img.src = pokemon.imagem
-    $opCorreta.innerHTML = pokemon.nome
-}
-
-function reqPokemon(id) {
-    const pokemonSorteado = fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-        .then(function (response) {
-            if (response.status == 200) {
-                return response.json()
+async function getPokemonQuiz(id) {
+    const n = fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(function (result) {
+            if (result.status == 200) {
+                return result.json()
             }
         })
-        .then(function (data) {
-            const obj = {
-                nome: data.name,
-                imagem: data.sprites.front_default
-            }
-            return obj
-        })
-        .catch(function (erro) {
-            console.log('Erro na requisição: ' + erro)
+        .then(function (pokemon) {
+            return pokemon
         })
 
-    return pokemonSorteado
+    return n
 }
 
+
+class PokemonQuiz {
+    constructor(id, nome, foto) {
+        this.id = id
+        this.nome = nome
+        this.foto = foto
+    }
+}
+
+
+const opcoesPokemons = document.querySelectorAll('.card-body a')
+opcoesPokemon.forEach(adicionarEvento)
+
+function adicionarEvento(elemento) {
+    elemento.addEventListener('click', mostrarValue)
+}
+
+function mostrarValue(event) {
+    event.preventDefault()
+    let alvo = event.target
+    let value = alvo.getAttribute('value')
+
+    if (verificarAcerto(value)) {
+        acertos++
+        console.log('acertou ' + acertos)
+    } else {
+        console.log('errou')
+    }
+
+    gerarRodada()
+    finalizarGame(contador)
+}
+
+function verificarAcerto(value) {
+    return value == valueCerto ? true : false
+}
+
+function finalizarGame(rodada){
+    if(rodada == 11){
+        alert('acabou')
+    }
+}
+
+iniciarGame()
+gerarRodada()
