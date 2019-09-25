@@ -147,6 +147,7 @@ async function opcoes(array) {
 function gerarRodada() {
     let op = getPokemonsOptions()
     opcoes(op)
+    resetarColors()
 }
 
 
@@ -188,18 +189,21 @@ function mostrarValue(event) {
 
     if (verificarAcerto(value)) {
         acertos++
-        console.log('acertou ' + acertos)
     } else {
-        console.log('errou')
+        alvo.style.background = "red"
     }
+
+    piscarCerto()
     let $rodadas = document.getElementById('rodadas')
     let $pontuacao = document.getElementById('pontuacao')
 
     $rodadas.innerHTML = `Rodadas ${contador}/10`
     $pontuacao.innerHTML = `Pontuação ${acertos}/10`
 
-    gerarRodada()
+    setTimeout(gerarRodada, 1000)
+
     finalizarGame(contador)
+
 }
 
 function verificarAcerto(value) {
@@ -208,8 +212,34 @@ function verificarAcerto(value) {
 
 function finalizarGame(rodada) {
     if (rodada >= 11) {
-        alert('acabou')
+        telaFinish()
     }
+}
+
+function telaFinish() {
+
+}
+
+function piscarCerto() {
+    const opcoesPokemons = document.querySelectorAll('#game-pokemon a')
+
+    opcoesPokemons.forEach((element) => {
+
+        let value = element.getAttribute('value')
+
+        if (value == valueCerto) {
+            element.style.background = "green"
+        }
+    })
+}
+
+function resetarColors() {
+    const opcoesPokemons = document.querySelectorAll('#game-pokemon a')
+
+    opcoesPokemons.forEach((element) => {
+        element.style.background = "#007BFF"
+    })
+
 }
 
 

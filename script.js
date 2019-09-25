@@ -32,7 +32,7 @@ $pesquisarID.addEventListener('click', main)
 function main() {
     let nomePokemon = getPokemonName()
 
-    if (validarInput(nomePokemon) && validarGeracao(nomePokemon)) {
+    if (validarInput(nomePokemon)) {
         nomePokemon = tratarNomePokemon(nomePokemon)
         getPokemon(nomePokemon)
     } else {
