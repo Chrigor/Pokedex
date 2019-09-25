@@ -79,3 +79,7 @@ body {
 .trocarImg {
     animation: fade 1s backwards;
 }
+
+#gamePokemon {
+    display: none;
+}

@@ -186,6 +186,11 @@ function mostrarValue(event) {
     } else {
         console.log('errou')
     }
+    let $rodadas = document.getElementById('rodadas')
+    let $pontuacao = document.getElementById('pontuacao')
+
+    $rodadas.innerHTML =  `Rodadas ${contador}/10`
+    $pontuacao.innerHTML = `Pontuação ${acertos}/10`
 
     gerarRodada()
     finalizarGame(contador)
@@ -196,7 +201,7 @@ function verificarAcerto(value) {
 }
 
 function finalizarGame(rodada){
-    if(rodada == 11){
+    if(rodada >= 11){
         alert('acabou')
     }
 }
