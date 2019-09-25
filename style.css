@@ -80,6 +80,10 @@ body {
     animation: fade 1s backwards;
 }
 
-#gamePokemon {
+#rodadas,#pontuacao {
+    visibility: hidden;
+}
+
+.remove {
     display: none;
 }

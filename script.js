@@ -226,6 +226,5 @@ class Pokemon {
 // IIFE p/ primeiro Pokémon
 (function () {
     getPokemon('pikachu')
-    console.log('chamou')
 })()
 

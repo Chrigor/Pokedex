@@ -58,6 +58,12 @@ function iniciarGame() {
     contador = 0
     valueCerto = 0
     acertos = 0
+
+    let rodadas = document.getElementById('rodadas')
+    let pontuacao = document.getElementById('pontuacao')
+
+    rodadas.style.visibility = "visible"
+    pontuacao.style.visibility = "visible"
 }
 
 function gerarNumeros() {
@@ -189,7 +195,7 @@ function mostrarValue(event) {
     let $rodadas = document.getElementById('rodadas')
     let $pontuacao = document.getElementById('pontuacao')
 
-    $rodadas.innerHTML =  `Rodadas ${contador}/10`
+    $rodadas.innerHTML = `Rodadas ${contador}/10`
     $pontuacao.innerHTML = `Pontuação ${acertos}/10`
 
     gerarRodada()
@@ -200,11 +206,29 @@ function verificarAcerto(value) {
     return value == valueCerto ? true : false
 }
 
-function finalizarGame(rodada){
-    if(rodada >= 11){
+function finalizarGame(rodada) {
+    if (rodada >= 11) {
         alert('acabou')
     }
 }
 
-iniciarGame()
-gerarRodada()
+
+let $buttonIniciar = document.getElementById('btn-iniciar-game')
+$buttonIniciar.addEventListener('click', startarGame)
+
+function startarGame(event) {
+    event.preventDefault()
+
+    let card = document.querySelector('.remove')
+    let cardMenu = document.getElementById('menu-jogo')
+
+    cardMenu.classList.remove('d-flex')
+    card.classList.remove('d-flex')
+    card.classList.remove('remove')
+
+    cardMenu.style.display = "none"
+
+    iniciarGame()
+    gerarRodada()
+}
+
