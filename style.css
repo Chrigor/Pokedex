@@ -95,3 +95,11 @@ body {
 .pokemonSorteado-visible {
     filter: brightness(100%);
 }
+
+.btn-tela-finalizar {
+    font-size: 25px;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 5px 9px;
+    margin: 2px;
+}

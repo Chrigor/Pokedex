@@ -3,6 +3,10 @@ const menuItems = document.querySelectorAll('.nav-link') // filtro [Links intern
 const buttonNome = document.getElementById('buscarNome')
 const buttonId = document.getElementById('buscarID')
 
+const buttonRestart = document.getElementsByClassName('btn-tela-finalizar')[0]
+
+buttonRestart.addEventListener('click', startarGame)
+
 buttonNome.addEventListener('click', scrollButton)
 buttonId.addEventListener('click', scrollButton)
 
@@ -52,7 +56,6 @@ let contador
 let valueCerto
 let acertos
 
-
 function iniciarGame() {
     pokemonsIDs = gerarNumeros()
     contador = 0
@@ -62,6 +65,9 @@ function iniciarGame() {
     let rodadas = document.getElementById('rodadas')
     let pontuacao = document.getElementById('pontuacao')
 
+    rodadas.innerHTML = 'Rodadas 1/10'
+    pontuacao.innerHTML = 'Pontuação 0/10'
+
     rodadas.style.visibility = "visible"
     pontuacao.style.visibility = "visible"
 }
@@ -70,7 +76,7 @@ function gerarNumeros() {
     let pokemonID = []
 
     for (let i = 0; i < 40; i++) {
-        let n = Math.ceil(Math.random() * 151)
+        let n = Math.floor(Math.random() * 151) + 1;
 
         if (pokemonID.indexOf(n) == -1) {
             pokemonID.push(n)
@@ -145,10 +151,12 @@ async function opcoes(array) {
 }
 
 function gerarRodada() {
-    let op = getPokemonsOptions()
-    opcoes(op)
-    resetarColors()
-    console.log('nova rodada')
+    if (contador < 10) {
+        let op = getPokemonsOptions()
+        opcoes(op)
+        resetarColors()
+    }
+
 }
 
 
@@ -251,6 +259,10 @@ function startarGame(event) {
 
     let card = document.querySelector('.remove')
     let cardMenu = document.getElementById('menu-jogo')
+    
+    let finalizar = document.querySelector('#finalizarGame')
+
+    finalizar.classList.add('remove')
 
     cardMenu.classList.remove('d-flex')
     card.classList.remove('d-flex')
