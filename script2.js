@@ -287,35 +287,6 @@ function adicionarCor() {
     $img.classList.add('pokemonSorteado-visibile')
 }
 
-
-async function getID(name) {
-
-    const n = fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-        .then(function (result) {
-            if (result.status == 200) {
-                return result.json()
-            }
-        })
-        .then(function (pokemon) {
-            return pokemon.id
-        })
-
-    return n
-
-}
-
-async function getPokemonId(name) {
-    let id = await getID(name)
-
-    if (verificarPrimeiraGeracao(id)) {
-        console.log('é da prim')
-        return true
-    } else {
-        console.log('nao é da primeira')
-      return false
-    }
-}
-
 function verificarPrimeiraGeracao(id) {
     return id <= 151 ? true : false
 }
