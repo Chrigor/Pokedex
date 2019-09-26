@@ -94,12 +94,6 @@ function sortfunction(a, b) {
     return (a - b) //faz com que o array seja ordenado numericamente e de ordem crescente.
 }
 
-/* function gatilhoQuiz() {
-    let pokemonsID = gerarNumeros()
-    getPokemonSorteado(pokemonsID)
-
-} */
-
 function getPokemonsOptions() {
     let option = []
     let index = 0
@@ -156,8 +150,8 @@ function gerarRodada() {
         opcoes(op)
         resetarColors()
     }
-
 }
+
 
 
 async function getPokemonQuiz(id) {
@@ -199,20 +193,23 @@ function mostrarValue(event) {
 
     $rodadas.innerHTML = `Rodadas ${contador}/10`
     $pontuacao.innerHTML = `Pontuação ${acertos}/10`
+
     adicionarCor()
+
     setTimeout(gerarRodada, 1000)
 
-    finalizarGame(contador)
-
+    finalizarGame()
 }
 
 function verificarAcerto(value) {
     return value == valueCerto ? true : false
 }
 
-function finalizarGame(rodada) {
-    if (rodada >= 10) {
-        telaFinish()
+
+
+function finalizarGame() {
+    if (contador >= 10) {
+        setTimeout(telaFinish, 1000)
         console.log('finalizou')
     }
 }
