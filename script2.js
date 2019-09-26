@@ -7,8 +7,8 @@ const buttonRestart = document.getElementsByClassName('btn-tela-finalizar')[0]
 
 buttonRestart.addEventListener('click', startarGame)
 
-buttonNome.addEventListener('click', scrollButton)
-buttonId.addEventListener('click', scrollButton)
+buttonNome.addEventListener('click', main)
+buttonId.addEventListener('click', main)
 
 menuItems.forEach(item => {
     item.addEventListener('click', scrollToIdOnClick); // adiciona pra cada item

@@ -10,8 +10,7 @@ let pokemonsArray = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmele
 
 function verificarEnter(event) {
     if (event.key == 'Enter') {
-        let nomePokemon = getPokemonName()
-        main()
+        main(event)
     }
 }
 
@@ -26,7 +25,7 @@ let $pesquisarID = document.getElementById('buscarID')
 $pesquisarNome.addEventListener('click', main)
 $pesquisarID.addEventListener('click', main)
 
-function main() {
+function main(event) {
     let nomePokemon = getPokemonName()
 
     if (validarInput(nomePokemon)) {
@@ -41,7 +40,6 @@ function main() {
                 }
             } else {
                 if (verificarPorNome(nomePokemon)) {
-                    console.log('validou')
                     nomePokemon = tratarNomePokemon(nomePokemon)
                     getPokemon(nomePokemon)
                     scrollToIdOnClick(event)
@@ -49,7 +47,6 @@ function main() {
                     alert('Pokemon nao é da primeira geracao')
                 }
             }
-
         } else {
             alert('error verificacao')
         }
