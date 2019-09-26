@@ -148,6 +148,7 @@ function gerarRodada() {
     let op = getPokemonsOptions()
     opcoes(op)
     resetarColors()
+    console.log('nova rodada')
 }
 
 
@@ -163,15 +164,6 @@ async function getPokemonQuiz(id) {
         })
 
     return n
-}
-
-
-class PokemonQuiz {
-    constructor(id, nome, foto) {
-        this.id = id
-        this.nome = nome
-        this.foto = foto
-    }
 }
 
 
@@ -211,14 +203,19 @@ function verificarAcerto(value) {
 }
 
 function finalizarGame(rodada) {
-    if (rodada >= 11) {
+    if (rodada >= 10) {
         telaFinish()
+        console.log('finalizou')
     }
 }
 
 function telaFinish() {
     let finalizar = document.querySelector('#finalizarGame')
-    
+    let cardJogo = document.getElementById('game-pokemon')
+    let $img = document.getElementById('pokemonSorteado')
+    $img.src = 'https://fontmeme.com/permalink/190926/8554725ba1863f8fbd3368f6877db2c5.png'
+
+    cardJogo.classList.add('remove')
     finalizar.classList.remove('remove')
     console.log('finalizou')
 }
@@ -266,13 +263,13 @@ function startarGame(event) {
 }
 
 
-function removerCor(){
+function removerCor() {
     let $img = document.getElementById('pokemonSorteado')
     $img.classList.remove('pokemonSorteado-visible')
     $img.classList.add('pokemonSorteado-oculto')
 }
 
-function adicionarCor(){
+function adicionarCor() {
     let $img = document.getElementById('pokemonSorteado')
     $img.classList.remove('pokemonSorteado-oculto')
     $img.classList.add('pokemonSorteado-visibile')
