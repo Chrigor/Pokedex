@@ -11,8 +11,26 @@ let pokemonsArray = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmele
 function verificarEnter(event) {
     if (event.key == 'Enter') {
         let nomePokemon = getPokemonName()
-        if (validarInput(nomePokemon)) {
+        main()
+    }
+}
 
+function tirarLoading() {
+    let $a = document.getElementsByClassName('a')[0]
+    $a.style.display = "none"
+}
+
+let $pesquisarNome = document.getElementById('buscarNome')
+let $pesquisarID = document.getElementById('buscarID')
+
+$pesquisarNome.addEventListener('click', main)
+$pesquisarID.addEventListener('click', main)
+
+function main() {
+    let nomePokemon = getPokemonName()
+
+    if (validarInput(nomePokemon)) {
+        if (validarInput(nomePokemon)) {
             if (isNumber(nomePokemon)) {
                 if (validarGeracao(nomePokemon)) {
                     nomePokemon = tratarNomePokemon(nomePokemon)
@@ -35,26 +53,6 @@ function verificarEnter(event) {
         } else {
             alert('error verificacao')
         }
-    }
-}
-
-function tirarLoading() {
-    let $a = document.getElementsByClassName('a')[0]
-    $a.style.display = "none"
-}
-
-let $pesquisarNome = document.getElementById('buscarNome')
-let $pesquisarID = document.getElementById('buscarID')
-
-$pesquisarNome.addEventListener('click', main)
-$pesquisarID.addEventListener('click', main)
-
-function main() {
-    let nomePokemon = getPokemonName()
-
-    if (validarInput(nomePokemon)) {
-        nomePokemon = tratarNomePokemon(nomePokemon)
-        getPokemon(nomePokemon)
     } else {
         alert('error main')
     }
