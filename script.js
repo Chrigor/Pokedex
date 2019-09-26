@@ -9,9 +9,22 @@ function verificarEnter(event) {
     if (event.key == 'Enter') {
         let nomePokemon = getPokemonName()
         if (validarInput(nomePokemon)) {
-            nomePokemon = tratarNomePokemon(nomePokemon)
-            getPokemon(nomePokemon)
-            scrollToIdOnClick(event)
+
+            if (isNumber(nomePokemon)) {
+                if (validarGeracao(nomePokemon)) {
+                    nomePokemon = tratarNomePokemon(nomePokemon)
+                    getPokemon(nomePokemon)
+                    scrollToIdOnClick(event)
+                } else {
+                   alert('Pokemon não é da primeira geracao')
+                }
+            } else {
+            
+                nomePokemon = tratarNomePokemon(nomePokemon)
+                getPokemon(nomePokemon)
+                scrollToIdOnClick(event)
+            }
+
         } else {
             alert('error verificacao')
         }
@@ -228,3 +241,6 @@ class Pokemon {
     getPokemon('pikachu')
 })()
 
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
