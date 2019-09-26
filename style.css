@@ -80,10 +80,18 @@ body {
     animation: fade 1s backwards;
 }
 
-#rodadas,#pontuacao {
+#rodadas, #pontuacao {
     visibility: hidden;
 }
 
 .remove {
     display: none;
+}
+
+.pokemonSorteado-oculto {
+    filter: brightness(0%);
+}
+
+.pokemonSorteado-visible {
+    filter: brightness(100%);
 }

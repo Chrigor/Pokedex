@@ -129,7 +129,7 @@ async function opcoes(array) {
             //console.log('Op certa: ' + array[index])
             let pokemon = await getPokemonQuiz(array[index])
             let $img = document.getElementById('pokemonSorteado')
-
+            removerCor()
             console.log(pokemon.sprites)
             $op.setAttribute('value', array[index])
             $op.innerHTML = pokemon.name
@@ -199,7 +199,7 @@ function mostrarValue(event) {
 
     $rodadas.innerHTML = `Rodadas ${contador}/10`
     $pontuacao.innerHTML = `Pontuação ${acertos}/10`
-
+    adicionarCor()
     setTimeout(gerarRodada, 1000)
 
     finalizarGame(contador)
@@ -217,7 +217,10 @@ function finalizarGame(rodada) {
 }
 
 function telaFinish() {
-
+    let finalizar = document.querySelector('#finalizarGame')
+    
+    finalizar.classList.remove('remove')
+    console.log('finalizou')
 }
 
 function piscarCerto() {
@@ -262,3 +265,15 @@ function startarGame(event) {
     gerarRodada()
 }
 
+
+function removerCor(){
+    let $img = document.getElementById('pokemonSorteado')
+    $img.classList.remove('pokemonSorteado-visible')
+    $img.classList.add('pokemonSorteado-oculto')
+}
+
+function adicionarCor(){
+    let $img = document.getElementById('pokemonSorteado')
+    $img.classList.remove('pokemonSorteado-oculto')
+    $img.classList.add('pokemonSorteado-visibile')
+}
