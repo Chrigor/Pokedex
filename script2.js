@@ -62,11 +62,11 @@ function iniciarGame() {
     valueCerto = 0
     acertos = 0
 
-    let rodadas = document.getElementById('rodadas')
+    //let rodadas = document.getElementById('rodadas')
     let pontuacao = document.getElementById('pontuacao')
 
     rodadas.innerHTML = 'Rodadas 1/10'
-    pontuacao.innerHTML = 'Pontuação 0/10'
+    //pontuacao.innerHTML = 'Pontuação 0/10'
 
     rodadas.style.visibility = "visible"
     pontuacao.style.visibility = "visible"
@@ -149,6 +149,7 @@ function gerarRodada() {
         let op = getPokemonsOptions()
         opcoes(op)
         resetarColors()
+        devolverClick()
     }
 }
 
@@ -178,6 +179,7 @@ function adicionarEvento(elemento) {
 
 function mostrarValue(event) {
     event.preventDefault()
+    retirarClick()
     let alvo = event.target
     let value = alvo.getAttribute('value')
 
@@ -201,6 +203,19 @@ function mostrarValue(event) {
     finalizarGame()
 }
 
+function retirarClick() {
+    for (let i = 0; i < opcoesPokemons.length; i++) {
+        opcoesPokemons[i].style.pointerEvents = 'none'
+    }
+}
+
+function devolverClick() {
+    for (let i = 0; i < opcoesPokemons.length; i++) {
+        opcoesPokemons[i].style.pointerEvents = ''
+    }
+}
+
+
 function verificarAcerto(value) {
     return value == valueCerto ? true : false
 }
@@ -210,7 +225,8 @@ function verificarAcerto(value) {
 function finalizarGame() {
     if (contador >= 10) {
         setTimeout(telaFinish, 1000)
-        console.log('finalizou')
+        let $p = document.getElementById('score')
+        $p.innerHTML = `Seu score foi de ${acertos}/10`
     }
 }
 
