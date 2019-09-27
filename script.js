@@ -251,3 +251,8 @@ function verificarPorNome(nome) {
     nome = nome.toLowerCase()
     return pokemonsArray.indexOf(nome) == -1 ? false : true
 }
+
+function playTema(){
+    let n = document.getElementById('audio-tema')
+    n.play()
+}

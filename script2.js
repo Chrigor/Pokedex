@@ -10,6 +10,13 @@ buttonRestart.addEventListener('click', startarGame)
 buttonNome.addEventListener('click', main)
 buttonId.addEventListener('click', main)
 
+
+let btnMusicaPlay = document.getElementById('btn-play')
+btnMusicaPlay.addEventListener('click', iniciarMusicaTema)
+
+let btnMusicaPause = document.getElementById('btn-pause')
+btnMusicaPause.addEventListener('click',pausarMusicaTema)
+
 menuItems.forEach(item => {
     item.addEventListener('click', scrollToIdOnClick); // adiciona pra cada item
 })
@@ -130,7 +137,6 @@ async function opcoes(array) {
             let pokemon = await getPokemonQuiz(array[index])
             let $img = document.getElementById('pokemonSorteado')
             removerCor()
-            console.log(pokemon.sprites)
             $op.setAttribute('value', array[index])
             $op.innerHTML = pokemon.name
             $img.src = pokemon.sprites.front_default
@@ -185,7 +191,9 @@ function mostrarValue(event) {
 
     if (verificarAcerto(value)) {
         acertos++
+        somAcerto()
     } else {
+        somErro()
         alvo.style.background = "red"
     }
 
@@ -285,8 +293,17 @@ function startarGame(event) {
 
     iniciarGame()
     gerarRodada()
+    pausarMusicaTema(event)
+    playMusicaBatalha()
 }
 
+function playMusicaBatalha(){
+    console.log('opa')
+
+    let $musica = document.getElementById('audio-batalha')
+    $musica.volume = 0.4
+    $musica.play()
+}
 
 function removerCor() {
     let $img = document.getElementById('pokemonSorteado')
@@ -304,3 +321,29 @@ function verificarPrimeiraGeracao(id) {
     return id <= 151 ? true : false
 }
 
+function iniciarMusicaTema(event){
+    event.preventDefault()
+
+    let musica = document.getElementById('audio-tema')
+    musica.volume = 0.3
+    musica.play()
+}
+
+function pausarMusicaTema(event){
+    event.preventDefault()
+
+    let musica = document.getElementById('audio-tema')
+    musica.pause()
+}
+
+function somAcerto(){
+    let m = document.getElementById('audio-resposta-certa')
+    m.currentTime = 6
+    m.play()
+}
+
+function somErro(){
+    let m = document.getElementById('audio-resposta-errada')
+    m.currentTime = 2
+    m.play()
+}
