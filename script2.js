@@ -77,13 +77,15 @@ function iniciarGame() {
 
     rodadas.style.visibility = "visible"
     pontuacao.style.visibility = "visible"
+
+    console.log(pokemonsIDs)
 }
 
 function gerarNumeros() {
     let pokemonID = []
-
+    
     for (let i = 0; i < 40; i++) {
-        let n = Math.floor(Math.random() * 151) + 1;
+        let n = Math.floor(Math.random() * (151) + 1)
 
         if (pokemonID.indexOf(n) == -1) {
             pokemonID.push(n)
@@ -91,8 +93,6 @@ function gerarNumeros() {
             i--
         }
     }
-
-    pokemonID.sort(sortfunction)
 
     return pokemonID
 }
@@ -115,7 +115,7 @@ function getPokemonsOptions() {
     } else {
         for (let i = 0; i < 4; i++) {
             do {
-                index = Math.ceil(Math.random() * 39)
+                index = Math.floor(Math.random() * (39 - 1) + 1)
             } while (pokemonsIDs[index] < 0)
 
             option.push(index)
