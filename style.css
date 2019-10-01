@@ -140,6 +140,15 @@ body {
     height: 100%;
     display: none;
     position: absolute;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
     box-sizing: border-box;
+}
+
+.pokeball {
+    background-image: url('_imagens/back1.gif');
+    background-position: center;
+    background-size: cover;
+    height: 60px;
+    width: 60px;
 }
