@@ -70,13 +70,13 @@ function iniciarGame() {
     acertos = 0
 
     //let rodadas = document.getElementById('rodadas')
-    let pontuacao = document.getElementById('pontuacao')
+    //let pontuacao = document.getElementById('pontuacao')
 
-    rodadas.innerHTML = 'Rodadas 1/10'
+    //rodadas.innerHTML = 'Rodadas 1/10'
     //pontuacao.innerHTML = 'Pontuação 0/10'
 
-    rodadas.style.visibility = "visible"
-    pontuacao.style.visibility = "visible"
+    //rodadas.style.visibility = "visible"
+    //pontuacao.style.visibility = "visible"
 
     console.log(pokemonsIDs)
 }
@@ -198,11 +198,11 @@ function mostrarValue(event) {
     }
 
     piscarCerto()
-    let $rodadas = document.getElementById('rodadas')
+   /* let $rodadas = document.getElementById('rodadas')
     let $pontuacao = document.getElementById('pontuacao')
 
     $rodadas.innerHTML = `Rodadas ${contador}/10`
-    $pontuacao.innerHTML = `Pontuação ${acertos}/10`
+    $pontuacao.innerHTML = `Pontuação ${acertos}/10` */
 
     adicionarCor()
 
