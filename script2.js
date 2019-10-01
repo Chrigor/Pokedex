@@ -15,7 +15,7 @@ let btnMusicaPlay = document.getElementById('btn-play')
 btnMusicaPlay.addEventListener('click', iniciarMusicaTema)
 
 let btnMusicaPause = document.getElementById('btn-pause')
-btnMusicaPause.addEventListener('click',pausarMusicaTema)
+btnMusicaPause.addEventListener('click', pausarMusicaTema)
 
 menuItems.forEach(item => {
     item.addEventListener('click', scrollToIdOnClick); // adiciona pra cada item
@@ -78,12 +78,12 @@ function iniciarGame() {
     //rodadas.style.visibility = "visible"
     //pontuacao.style.visibility = "visible"
 
-    console.log(pokemonsIDs)
+    escondeLoadingGame()
 }
 
 function gerarNumeros() {
     let pokemonID = []
-    
+
     for (let i = 0; i < 40; i++) {
         let n = Math.floor(Math.random() * (151) + 1)
 
@@ -156,6 +156,7 @@ function gerarRodada() {
         opcoes(op)
         resetarColors()
         devolverClick()
+        escondeLoadingGame()
     }
 }
 
@@ -198,14 +199,14 @@ function mostrarValue(event) {
     }
 
     piscarCerto()
-   /* let $rodadas = document.getElementById('rodadas')
-    let $pontuacao = document.getElementById('pontuacao')
-
-    $rodadas.innerHTML = `Rodadas ${contador}/10`
-    $pontuacao.innerHTML = `Pontuação ${acertos}/10` */
+    /* let $rodadas = document.getElementById('rodadas')
+     let $pontuacao = document.getElementById('pontuacao')
+ 
+     $rodadas.innerHTML = `Rodadas ${contador}/10`
+     $pontuacao.innerHTML = `Pontuação ${acertos}/10` */
 
     adicionarCor()
-
+    mostraLoadingGame()
     setTimeout(gerarRodada, 1000)
 
     finalizarGame()
@@ -235,6 +236,7 @@ function finalizarGame() {
         setTimeout(telaFinish, 1000)
         let $p = document.getElementById('score')
         $p.innerHTML = `Seu score foi de ${acertos}/10`
+        escondeLoadingGame()
     }
 }
 
@@ -297,7 +299,7 @@ function startarGame(event) {
     playMusicaBatalha()
 }
 
-function playMusicaBatalha(){
+function playMusicaBatalha() {
     console.log('opa')
 
     let $musica = document.getElementById('audio-batalha')
@@ -321,7 +323,7 @@ function verificarPrimeiraGeracao(id) {
     return id <= 151 ? true : false
 }
 
-function iniciarMusicaTema(event){
+function iniciarMusicaTema(event) {
     event.preventDefault()
 
     let musica = document.getElementById('audio-tema')
@@ -329,21 +331,36 @@ function iniciarMusicaTema(event){
     musica.play()
 }
 
-function pausarMusicaTema(event){
+function pausarMusicaTema(event) {
     event.preventDefault()
 
     let musica = document.getElementById('audio-tema')
     musica.pause()
 }
 
-function somAcerto(){
+function somAcerto() {
     let m = document.getElementById('audio-resposta-certa')
     m.currentTime = 6
     m.play()
 }
 
-function somErro(){
+function somErro() {
     let m = document.getElementById('audio-resposta-errada')
     m.currentTime = 2
     m.play()
+}
+
+
+function mostraLoadingGame() {
+    let $loading = document.querySelector('.load-game')
+    $loading.style.display = "flex"
+    $loading.style.justifyContent = "center"
+    $loading.style.alignItems = "center"
+    
+}
+
+function escondeLoadingGame() {
+    let $loading = document.querySelector('.load-game')
+    $loading.style.display = "none"
+   
 }

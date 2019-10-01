@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pokédex</title>
-    <link rel="shortcut icon" href="_imagens/Pokemon-icon.png"/>
-    
+    <link rel="shortcut icon" href="_imagens/Pokemon-icon.png" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -173,7 +173,7 @@
         <div class="row interno" id="quiz">
             <div class="col-md-12">
                 <h1 class="h1 text-center">PokeQuiz</h1>
-               <!-- <p id="rodadas" class="text">Rodadas 1/10</p>
+                <!-- <p id="rodadas" class="text">Rodadas 1/10</p>
                 <p id="pontuacao">Pontuação 0/10</p> -->
             </div>
 
@@ -188,6 +188,13 @@
                         <a href="#" id="op2" value="2" class="btn btn-primary w-100 m-1">Go somewhere</a>
                         <a href="#" id="op3" value="3" class="btn btn-primary w-100 m-1">Go somewhere</a>
                         <a href="#" id="op4" value="4" class="btn btn-primary w-100 m-1">Go somewhere</a>
+                    </div>
+
+
+                    <div class="load-game">
+                        <div class="spinner">
+
+                        </div>
                     </div>
 
                     <div id="menu-jogo" class="card-body-menu d-flex justify-content-center mt-2">
@@ -249,7 +256,7 @@
     <audio id="audio-batalha" src="pokemon_batalha.mp3"></audio>
     <audio id="audio-resposta-certa" src="resposta_certa.mp3"></audio>
     <audio id="audio-resposta-errada" src="resposta_errada.mp3"></audio>
-    
+
     <div id="btn-musica">
         <a id="btn-play" href=""><i class="fas fa-play"></i></a>
         <a id="btn-pause" href=""><i class="fas fa-pause"></i></a>
